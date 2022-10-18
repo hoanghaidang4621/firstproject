@@ -136,51 +136,18 @@ $di['router'] = function () {
 	));
 	
 	//Set a router not found
-     $router->add("/notfound", array(
-		"module" => "frontend",
-        "controller" => "notfound",
-        "action"     => "index"
-    ));
+     $router->add("/notfound", ["module" => "frontend","controller" => "notfound", "action"=> "index"]);
 	
     //Define a router index
-    $router->add("/", array(
-		"module" => "frontend",
-        "controller" => "index",
-        "action"     => "index"
-    ));
-	$router->add("/login", array(
-		"module"	=> "frontend",
-		"controller" => "login",
-        "action"     => "index"
-	));
-		$router->add("/register", array(
-		"module"	=> "frontend",
-		"controller" => "login",
-        "action"     => "register"
-	));
+    $router->add("/", ["module" => "frontend", "controller" => "index","action"=> "index"]);
+	$router->add("/login", ["module"=> "frontend","controller" => "login","action"=> "index"]);
+		$router->add("/register", ["module"	=> "frontend","controller" => "login","action"=> "register"]);
 
-    $router->add('/product', array(
-		"module" => "frontend",
-		"controller" => "product",
-		"action"	=> "getProduct"
-	));
-    $router->add('/product/:action/:params', array(
-		"module" => "frontend",
-		"controller" => "product",
-		"action"	=> 1,
-        'params'     => 2,
-	));
+    $router->add('/product', ["module" => "frontend","controller" => "product","action"=> "getProduct"]);
+    $router->add('/product/edit', ["module" => "frontend","controller" => "product","action"=>'editproduct']);
 
-	$router->add('/dashboard', array(
-		"module" => "backend",
-		"controller" => "index",
-		"action"	=> "index"
-    ));
-	$router->add('/dashboard/:controller', array(
-		"module" => "backend",
-		"controller" => 1,
-		"action"	=> "index"
-	));
+	$router->add('/dashboard', ["module" => "backend","controller" => "index","action"=> "index"]);
+	$router->add('/dashboard/:controller', ["module" => "backend","controller" => 1,"action"=> "index"]);
 //handle
 	$router->handle();
     return $router;
