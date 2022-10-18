@@ -1,0 +1,313 @@
+			<script type="text/javascript">
+				$(function() {
+					var loginEmail = $("#login-email");
+					var loginEmailMsg = loginEmail.next();
+					var loginPassword = $("#login-password");
+					var loginPasswordMsg = loginPassword.next();
+					var validLoginEmail = true;
+					var validLoginPassword = true;
+					loginEmail.on("focusout", function(){
+						var self = $(this);
+						var email = self.prop("value");
+						if(LValidator.validEmail(email)==false)
+						{
+							loginEmailMsg.text("Enter a valid email!");
+							validLoginEmail = false;
+							return;
+						}
+						loginEmailMsg.text("");
+						validLoginEmail = true;
+					});
+					loginPassword.on("focusout", function(){
+						var self = $(this);
+						var password = self.prop("value");
+						if(password.length<1)
+						{
+							loginPasswordMsg.text("We need your password!");
+							validLoginPassword = false;
+							return;
+						}
+						loginPasswordMsg.text("");
+						validLoginPassword = true;
+					});
+					var validateLoginForm = function(){
+						loginEmail.trigger("focusout");
+						loginPassword.trigger("focusout");
+					};
+					$("#frontend-login-form").submit(function(event){
+						validateLoginForm();
+						if(validLoginEmail==false || validLoginPassword==false)
+						{
+							event.preventDefault();
+						}
+					});
+					
+					var regisName = $("#regis-name");
+					var nameMsg = regisName.next();
+					var regisEmail = $("#regis-email");
+					var emailMsg = regisEmail.next();
+					var regisPassword = $("#regis-password");
+					var passwordMsg = regisPassword.next();
+					var regisConfirmPassword = $("#regis-confirm-password");
+					var confirmPasswordMsg = regisConfirmPassword.next();
+					var regisTel = $("#regis-tel");
+					var telMsg = regisTel.next();
+					var regisCountry = $("#regis-country");
+					var countryMsg = regisCountry.next();
+					var regisAddress = $("#regis-address");
+					var addressMsg = regisAddress.next();
+					$("#frontend-register-form").submit(function(event){
+						var valid = true;
+						if(regisName.prop("value").length<1)
+						{
+							nameMsg.text("What's your name?");
+							valid = false;
+						}
+						else
+						{
+							nameMsg.text('');
+						}
+						if(LValidator.validEmail(regisEmail.prop("value"))==false)
+						{
+							emailMsg.text("Enter a valid email!");
+							valid = false;
+						}
+						else
+						{
+							emailMsg.text('');
+						}
+						if(regisPassword.prop("value").length<1)
+						{
+							passwordMsg.text("We need your password!");
+							valid = false;
+						}
+						else
+						{
+							passwordMsg.text('');
+						}
+						if(regisConfirmPassword.prop("value").length<1)
+						{
+							confirmPasswordMsg.text("Retype your password!");
+							valid = false;
+						}
+						else
+						{
+							if(regisConfirmPassword.prop("value")!=regisPassword.prop("value"))
+							{
+								confirmPasswordMsg.text("Passwords are't matched!");
+								valid = false;
+							}
+							else
+							{
+								confirmPasswordMsg.text('');
+							}
+						}
+						if(LValidator.validTel(regisTel.prop("value"))==false)
+						{
+							telMsg.text("Enter a valid phone number!");
+							valid = false;
+						}
+						else
+						{
+							telMsg.text('');
+						}
+						if(regisCountry.prop("value")<1)
+						{
+							countryMsg.text("Select your country!");
+							valid = false;
+						}
+						else
+						{
+							countryMsg.text('');
+						}
+						if(regisAddress.prop("value").length<1)
+						{
+							addressMsg.text("We need your address!");
+							valid = false;
+						}
+						else
+						{
+							addressMsg.text('');
+						}
+						if(valid==false)
+						{
+							event.preventDefault();
+						}
+					});
+				});
+			</script>
+            <?php
+                if(isset($message))
+                {
+            ?>
+                <div class="alert alert-error">
+                    <?php echo $message; ?>
+                </div>
+            <?php
+                }
+            ?>
+            <div class="bg-module-sub" style="width:980px;"><h3></h3></div>
+            <div class="user_login">
+                <div class="user_or"></div>
+                <div class="user_login_left">
+                    <form id="frontend-login-form" name="formLogin" action="<?php echo $this->url->get('login?action=login');?>" method="post">
+                        <strong >I am a returning customer – Login here</strong>
+                        <div class="padding_5px"></div>
+                        <div class="row">
+                            <div class="row_left"><strong>Email</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input class="textbox" style="width:230px;" id="login-email" type="text"
+                                    name="email" placeholder="Your account email" maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Password</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input id="login-password" class="textbox" style="width:230px;" type="password" name="password"
+                                    placeholder="Your account password" maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <p>Did you forget your password? <a href="<?php echo $this->url->get('login?action=forgot'); ?>" target="_self" title="Recover it here">Recover it here</a></p>
+                        
+                        <div class="row">
+                            <div class="row_left">&nbsp;</div>
+                            <div class="row_right">
+                            	<input class="super button red" style="width:170px;" type="submit" id="btn-login" name="btn-login" value="LOGIN"/>
+                        	</div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="user_login_right">
+                    <form id="frontend-register-form" name="form" action="<?php echo $this->url->get("login?action=register");?>" method="post">
+                        <strong>I am a new customer - Create account here</strong>
+                        <div class="padding_5px"></div>
+                        <div class="row">
+                            <div class="row_left"><strong>Full name</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                            	<input id="regis-name" class="textbox" style="width:245px;" type="text" name="name"
+                                    placeholder="Ex: John"
+                                    value="<?php echo !empty($inputData[0])?$inputData[0]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Email</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input id="regis-email" class="textbox" style="width:245px;" type="text" name="email"
+                                    placeholder="Ex: john@gmail.com"
+                                    value="<?php echo !empty($inputData[1])?$inputData[1]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Password</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input id="regis-password" class="textbox" style="width:245px;" type="password" name="password"
+                                    placeholder="Type your password"
+                                    value="<?php echo !empty($inputData[2])?$inputData[2]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Confirm password</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input id="regis-confirm-password" class="textbox" style="width:245px;" type="password"
+                                    placeholder="Retype your password" name="confirm-password"
+                                    value="<?php echo !empty($inputData[3])?$inputData[3]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Skype</strong></div>
+                            <div class="row_right">
+                                <input id="regis-skype" class="textbox" style="width:245px;" type="text" name="skype"
+                                    placeholder="Ex: john"
+                                    value="<?php echo !empty($inputData[7])?$inputData[7]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Phone Number</strong> <span class="l-red">*</span></div>
+                            <div class="row_right">
+                                <input id="regis-tel" class="textbox" style="width:245px;" type="text" name="tel"
+                                    placeholder="Ex: +1xxxxxxxx"
+                                    value="<?php echo !empty($inputData[4])?$inputData[4]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Country</strong> <span class="l-red">* <a href="#" target="_self" title="<?php echo country_key; ?>" class="hover-question"><strong>[?]</strong></a></span></div>
+                            <div class="row_right">
+                                <select id="regis-country" name="country" class="combobox" style="width:254px">
+                                    <option value="0">Please select</option>
+                                    <?php
+                                        $selected = !empty($inputData[5])?$inputData[5]:0;
+                                        foreach($countries as $country)
+                                        {
+                                    ?>
+                                            <option value="<?php echo $country->getCountryID(); ?>"
+                                                <?php
+                                                    if($selected==$country->getCountryID())
+                                                    {
+                                                        echo "selected";
+                                                    }
+                                                ?>
+                                                ><?php echo $country->getCountryName(); ?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="row_left"><strong>Shipping Address</strong> <span class="l-red">* <a href="#" target="_self" title="<?php echo billing_address_key; ?>" class="hover-question"><strong>[?]</strong></a></span></div>
+                            <div class="row_right">
+                                <input id="regis-address" class="textbox" style="width:245px;" type="text" name="address"
+                                    placeholder="Type your shipping address"
+                                    value="<?php echo !empty($inputData[6])?$inputData[6]:""; ?>" 
+                                    maxlength="255"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                         <div class="row">
+                            <div class="row_left">&nbsp;</div>
+                            <div class="row_right">
+                            	<input id="btn-register" type="submit" name="btn-register" value="SIGN UP" class="super button red" style="width:150px" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear" style="height:10px;"></div>

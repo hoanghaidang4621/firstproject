@@ -1,0 +1,60 @@
+			<script type="text/javascript">
+				$(function() {
+					var email = $("#email");
+					var emailMsg = $("#email-error");
+					$("#btn-reset").on("click", function(event){
+						var valid = true;
+						if(validEmail(email.prop("value"))==false)
+						{
+							emailMsg.text("Enter a valid email!");
+							valid = false;
+						}
+						else
+						{
+							emailMsg.text('');
+						}
+						if(valid)
+						{
+							$("#frontend-forgot-form").submit();
+						}
+					});
+					var validEmail = function (email) { 
+						var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						return re.test(email);
+					}
+				});
+			</script>
+			<?php
+				if(isset($message)) 
+				{
+			?>   
+				<div class="alert alert-<?php echo $message['type'] ?>">
+					<?php echo $message['message']; ?>
+                </div>
+			<?php
+				}
+			?>
+            <div class="bg-module-sub" style="width:980px;"><h3></h3></div>
+            <div class="user_login">
+                 <form id="frontend-forgot-form" name="formLogin" action="<?php echo $this->url->get('login?action=forgot');?>" method="post" class="form">
+                    <div class="row">
+                        <div class="row_left" style="width:100%">If you have forgotten or lost your password, or have been locked out of your account, enter your email to reset your password.
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row">
+                        <div class="row_left" style="width:10%"><strong>Email</strong> <font color="#FF0000">*</font></div>
+                        <div class="row_right" style="width:30%">
+                            <input id="email" class="textbox" style="width:230px;" type="text" name="email"
+                                placeholder="Your account email" 
+                                maxlength="255"/>
+                        	<div id="email-error" class="error"></div>
+                        </div>
+                        <div class="row_right" style="width:30%">
+                            <input type="button" id="btn-reset" name="btn-reset" value="RESET" class="super button red" />
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                 </form>
+            </div>
+            <div class="clear" style="height:10px;"></div>

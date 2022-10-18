@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Handle</th>
+    </tr>
+
+  </thead>
+  <?php 
+  $val = $this->view->products;
+  foreach ($products as $prd) {
+    echo ('
+      <tbody>
+        <tr>
+          <th scope="row">'.$prd->product_id.'</th>
+          <td>'.$prd->name.'</td>
+          <td>'.$prd->price.'</td>
+          <td>
+          <a href="/edit/'.$prd->product_id.'" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Edit</a>
+          <a href="/delete" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    ');
+  }
+  
+  ?>
+</table>

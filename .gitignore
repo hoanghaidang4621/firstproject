@@ -1,0 +1,13 @@
+.idea
+.htaccess
+public/index.php
+public/.htaccess
+config/config.php
+apps/backend/cache/
+apps/frontend/cache/
+apps/messages/
+cybersource_logs/
+apps/library/cybersource/conf/cybs_*
+db_logs/
+apps/logs/
+/apps/library/MPDF57/ttfontdata/*

@@ -1,0 +1,64 @@
+<?php
+	$fUserID = $this->my->formatUserID($user->getUserInsertTime(), $user->getUserID());
+	
+	$adminMessage ="<div style='border: 1px solid #000;'>
+<table cellspacing='5' cellpadding='5' border='0' bgcolor='#ffffc0' align='center' width='100%'>
+   <tr>
+    <td>
+     <strong>Dear <em>".$user->getUserName()."</em>,</strong>
+     </td>
+  </tr>
+    <tr>
+    <td>
+    Thank you for choosing <a href='http://www.bin.vn' target='_blank' >www.bin.vn</a>. Below, we have included your login details as requested. Please login now and continue to use Bin service at <a href='http://www.bin.vn' target='_blank' >www.bin.vn</a>.</td>
+  </tr>
+  <tr>
+    <td valign='top' >
+    <table width='100%' border='1'  cellpadding='5'  style='border-collapse:collapse' bordercolor='#000' bgcolor='#FFFFFF' >
+  <tr>
+    <td style='width:200px;'><strong>Full Name</strong></td>
+    <td>".$user->getUserName()."</td>
+  </tr>
+  <tr>
+    <td><strong>Email</strong></td>
+    <td><a href='mailto:".$user->getUserEmail()."' target='_blank'>".$user->getUserEmail()."</a></td>
+  </tr>
+  <tr>
+    <td><strong>Skype</strong></td>
+    <td>".$user->getUserSkype()."</td>
+  </tr>
+  <tr>
+    <td><strong>Country</strong></td>
+    <td>".$country->getCountryName()."</td>
+  </tr>
+  <tr>
+    <td><strong>Shipping Address</strong></td>
+    <td>".$user->getUserAddress()."</td>
+  </tr>
+  <tr>
+    <td><strong>Telephone</strong></td>
+    <td>".$user->getUserTel()."</td>
+  </tr>
+</table>
+    <p>
+                    <strong><em>Best Regards,</em></strong><br>
+                    <strong>One Incorporation &  Business Centre (Hong Kong) - Bin</strong><br />
+                    Galaxy One Hong Kong Limited<br />
+                    
+                    Hong Kong special Administrative Region companies Registry Official Registered Agent Number: 3583<br />
+                    <strong>Website</strong>: <a href='https://www.bin.vn/' target='_blank'>www.bin.vn</a><br />
+                    <strong>Email</strong>: <a href='mailto:support@bin.vn' target='_self'>support@bin.vn</a><br />
+                    <strong>Hotline</strong>: +852 8199 0468<br />
+                    <strong>Address</strong>: 66 Floor, Suite 01, The Center building, 99 Queen's Road, Central, Hong Kong<br />
+                    WE ARE BESIDE YOU 24/7.
+                </p>
+    </td></tr>
+</td></tr>
+  <tr><td colspan='5' style='border-top:#666 solid 1px;'  >
+  <p>
+    <em>This email and any files transmitted with it are  confidential and intended solely for the use of the individual or entity to  whom they are addressed. If you have received this email in error please notify  the system manager. This message contains confidential information and is  intended only for the individual named. If you are not the named addressee you  should not disseminate, distribute or copy this e-mail. Please notify the  sender immediately by e-mail if you have received this e-mail by mistake and  delete this e-mail from your system. If you are not the intended recipient you  are notified that disclosing, copying, distributing or taking any action in  reliance on the contents of this information is strictly prohibited.</em><br>
+    <em>All content within the  email for reference purposes only. We are consulting company based on customer  requirements, the advice given is based on the law of the host country.  Therefore, we do not assume any liability from customers's activities when they  violate the rules or cheating involved in the home country.</em></p>
+  </td></tr>
+</table>
+</div>"; 
+?>

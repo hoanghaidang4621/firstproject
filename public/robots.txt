@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /dashboard/*
+Disallow: /cgi-bin/
+Disallow: /public/backend/
+Disallow: /public/frontend/
+Disallow: /public/shared/
+Disallow: /public/uploads/
+sitemap: https://{domain}/sitemap.xml
